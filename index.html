@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Quote Machine</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* iOS System Font Stack */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f8bbd0;  /* Light pink background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #quote-box {
+      background-color: #fff;  /* White background for the quote box */
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #text {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+      font-style: normal; /* Ensuring the text is not slanted */
+    }
+
+    #author {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #777;
+    }
+
+    /* Button Styles */
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    #prev-quote {
+      background-color: #ffab91;  /* Light coral */
+      color: white;
+    }
+
+    #prev-quote:hover {
+      background-color: #ff7043;  /* Darker coral */
+    }
+
+    #next-quote {
+      background-color: #ff7043;  /* Dark coral */
+      color: white;
+    }
+
+    #next-quote:hover {
+      background-color: #d84b2a;  /* Even darker coral */
+    }
+
+  </style>
+</head>
+<body>
+  <div id="quote-box">
+    <p id="text">"Khaled Hosseini's quotes will appear here."</p>
+    <p id="author">- Khaled Hosseini</p>
+    <button id="prev-quote">Previous Quote</button>
+    <button id="next-quote">Next Quote</button>
+  </div>
+
+  <script>
+    // Array of quotes from Khaled Hosseini's books
+    const quotes = [
+      { text: "For you, a thousand times over.", author: "Khaled Hosseini, The Kite Runner" },
+      { text: "In the end, the world always makes a place for the broken.", author: "Khaled Hosseini, The Kite Runner" },
+      { text: "A boy who won't stand up for himself becomes a man who can't stand up to anything.", author: "Khaled Hosseini, A Thousand Splendid Suns" },
+      { text: "You can not swim for new horizons until you have courage to lose sight of the shore.", author: "Khaled Hosseini, A Thousand Splendid Suns" },
+      { text: "When you kill a man, you steal a life. You steal his dreams. His hopes. His future.", author: "Khaled Hosseini, The Kite Runner" },
+      { text: "But I want you to know that I will always love you. I will love you forever.", author: "Khaled Hosseini, A Thousand Splendid Suns" },
+      { text: "There is a way to be good again.", author: "Khaled Hosseini, The Kite Runner" },
+      { text: "It's the part of the story where the hero chooses to sacrifice for a greater good.", author: "Khaled Hosseini, A Thousand Splendid Suns" }
+    ];
+
+    const quoteText = document.getElementById("text");
+    const quoteAuthor = document.getElementById("author");
+    const prevQuoteButton = document.getElementById("prev-quote");
+    const nextQuoteButton = document.getElementById("next-quote");
+
+    let currentQuoteIndex = 0;
+
+    // Function to update the quote text and author
+    function updateQuote() {
+      const currentQuote = quotes[currentQuoteIndex];
+      quoteText.textContent = `"${currentQuote.text}"`;
+      quoteAuthor.textContent = `- ${currentQuote.author}`;
+    }
+
+    // Function to show the previous quote
+    function showPreviousQuote() {
+      if (currentQuoteIndex > 0) {
+        currentQuoteIndex--;
+      } else {
+        currentQuoteIndex = quotes.length - 1;  // Loop back to the last quote
+      }
+      updateQuote();
+    }
+
+    // Function to show the next quote
+    function showNextQuote() {
+      if (currentQuoteIndex < quotes.length - 1) {
+        currentQuoteIndex++;
+      } else {
+        currentQuoteIndex = 0;  // Loop back to the first quote
+      }
+      updateQuote();
+    }
+
+    // Event listeners for "Previous" and "Next" buttons
+    prevQuoteButton.addEventListener("click", showPreviousQuote);
+    nextQuoteButton.addEventListener("click", showNextQuote);
+
+    // Initialize with the first quote
+    updateQuote();
+  </script>
+</body>
+</html>
